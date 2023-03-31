@@ -7,7 +7,7 @@
     "prepare": "husky install",
     "lint:fix": "eslint . --fix",
     "test": "vitest --run --passWithNoTests --coverage",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "@vitest/coverage-c8": "^0.28.5",
+    "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
