@@ -1,5 +1,5 @@
 export default interface IHttpServer {
-  on(method: HttpMethods): void
+  on(method: HttpMethods, url: string, callback: Function): void
   listen(port: number): void
 }
 
