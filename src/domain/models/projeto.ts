@@ -1,4 +1,4 @@
-export class Projeto {
+export default class Projeto {
   constructor(
     readonly id: string,
     readonly titulo: string,
@@ -15,7 +15,7 @@ export class Projeto {
   ) {}
 }
 
-export enum EstadoProjeto {
+enum EstadoProjeto {
   NAO_INICIADO,
   INICIADO,
   CANCELADO,

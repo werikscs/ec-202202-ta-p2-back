@@ -1,5 +1,5 @@
 import PacoteTrabalho from './pacote-trabalho'
-import { Projeto } from './projeto'
+import Projeto from './projeto'
 
 export default class Atividade {
   constructor(

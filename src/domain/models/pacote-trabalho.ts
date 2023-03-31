@@ -1,4 +1,4 @@
-import { Projeto } from './projeto'
+import Projeto from './projeto'
 
 export default class PacoteTrabalho {
   constructor(
