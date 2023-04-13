@@ -1,9 +1,13 @@
 import 'dotenv/config'
-import ExpressHttpServer from './infra/http/express-http-server'
+import express from 'express'
+import cors from 'cors'
+import routes from './interface-adapters/routes'
 
-async function main() {
-  const httpServer = new ExpressHttpServer()
-  httpServer.listen(3000)
-}
+const app = express()
+const PORT = process.env.PORT || 3000
 
-main()
+app.use(express.json())
+app.use(cors())
+app.use(routes)
+
+app.listen(PORT, () => console.log(`Express server running on port ${PORT}`))
