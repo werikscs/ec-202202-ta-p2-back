@@ -1,11 +1,6 @@
-export type UserTypeDB = {
-  id: string
-  name: string
-  email: string
-  password: string
-}
+import { UserDataDB } from '../domain/types/auth'
 
-export const fakeUserDB: UserTypeDB[] = [
+const fakeUserDB: UserDataDB[] = [
   {
     id: '856be205-18d7-4b55-8e67-d27501f7cf5f',
     email: 'zezim@email.com',
@@ -13,3 +8,5 @@ export const fakeUserDB: UserTypeDB[] = [
     password: '123456',
   },
 ]
+
+export default fakeUserDB
