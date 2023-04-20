@@ -5,7 +5,7 @@ import LoginUserUseCase from '../../../application/use-cases/auth/loginUser'
 class LoginUserController {
   constructor(readonly loginUserUseCase: LoginUserUseCase) {}
 
-  async handle(req: Request, res: Response): Promise<Response | void> {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { email, password } = req.body
 
     try {

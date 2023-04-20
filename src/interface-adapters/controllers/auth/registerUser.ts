@@ -5,7 +5,7 @@ import CustomError from '../../errors/customError'
 class RegisterUserController {
   constructor(readonly registerUserUseCase: RegisterUserUseCase) {}
 
-  async handle(req: Request, res: Response): Promise<Response | void> {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body
 
     try {
