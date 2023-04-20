@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { IAuthRepository } from '../../../domain/repositories/auth'
 import { LoginUserInput, LoginUserOutput } from '../../../domain/types/auth'
 import CustomError from '../../../interface-adapters/errors/customError'
+import CustomErrorMessages from '../../../interface-adapters/errors/customErrorMessages'
 
 class LoginUserUseCase {
   constructor(readonly authUserRepository: IAuthRepository) {}
@@ -11,7 +12,7 @@ class LoginUserUseCase {
     const userFound = await this.authUserRepository.findByEmail(input.email)
 
     if (!userFound) {
-      throw new CustomError(400, 'User not registered')
+      throw new CustomError(404, CustomErrorMessages.USER_NOT_REGISTERED)
     }
 
     const { password } = input
@@ -19,7 +20,7 @@ class LoginUserUseCase {
     const validPassword = await bcrypt.compare(password, userPassword)
 
     if (!validPassword) {
-      throw new CustomError(401, 'Incorrect Credentials')
+      throw new CustomError(401, CustomErrorMessages.INCORRECT_CREDENTIALS)
     }
 
     const token = jwt.sign({ id: userFound.id }, `${process.env.SECRET_KEY}`, {

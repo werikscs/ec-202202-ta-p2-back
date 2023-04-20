@@ -5,6 +5,7 @@ import {
   RegisterUserOutput,
 } from '../../../domain/types/auth'
 import CustomError from '../../../interface-adapters/errors/customError'
+import CustomErrorMessages from '../../../interface-adapters/errors/customErrorMessages'
 
 class RegisterUserUseCase {
   constructor(readonly authUserRepository: IAuthRepository) {}
@@ -13,7 +14,7 @@ class RegisterUserUseCase {
     const emailFound = await this.authUserRepository.findByEmail(input.email)
 
     if (emailFound) {
-      throw new CustomError(400, 'Email already taken')
+      throw new CustomError(400, CustomErrorMessages.EMAIL_ALREADY_TAKEN)
     }
 
     const id = uuidv4()
