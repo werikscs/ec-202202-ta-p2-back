@@ -1,29 +1,43 @@
 import { Request, Response, Router } from 'express'
-import RegisterUserController from '../controllers/user/registerUser'
+import { IAuthRepository } from '../../domain/repositories/auth'
+import RegisterUserController from '../controllers/auth/registerUser'
 import RegisterUserUseCase from '../../application/use-cases/auth/registerUser'
-import { IRegisterUserRepository } from '../../domain/repositories/auth'
 import InMemoryAuthRepository from '../repositories/inMemoryAuthRepository'
-import registerUserValidator from '../middlewares/auth/registerUserValidator'
+import schemaValidator from '../middlewares/validators/auth/schemaValidator'
+import registerUserSchema from '../middlewares/validators/auth/registerUserSchema'
+import loginUserSchema from '../middlewares/validators/auth/loginUserSchema'
+import LoginUserUseCase from '../../application/use-cases/auth/loginUser'
+import LoginUserController from '../controllers/auth/loginUser'
 
 const authRouter = Router()
 
-const factoryRegisterUser = () => {
-  const repository: IRegisterUserRepository = new InMemoryAuthRepository()
+const registerUserFactory = () => {
+  const repository: IAuthRepository = new InMemoryAuthRepository()
   const useCase = new RegisterUserUseCase(repository)
   const controller = new RegisterUserController(useCase)
   return controller
 }
 
-const registerUserController = factoryRegisterUser()
+const loginUserFactory = () => {
+  const repository: IAuthRepository = new InMemoryAuthRepository()
+  const useCase = new LoginUserUseCase(repository)
+  const controller = new LoginUserController(useCase)
+  return controller
+}
+
+const registerUserController = registerUserFactory()
+const loginUserController = loginUserFactory()
 
 authRouter.post(
   '/register',
-  registerUserValidator,
+  schemaValidator(registerUserSchema),
   (req: Request, res: Response) => registerUserController.handle(req, res),
 )
 
-// authRouter.post('/login', (req: Request, res: Response, next: NextFunction) => {
-//   console.log('login route')
-// })
+authRouter.post(
+  '/login',
+  schemaValidator(loginUserSchema),
+  (req: Request, res: Response) => loginUserController.handle(req, res),
+)
 
 export default authRouter

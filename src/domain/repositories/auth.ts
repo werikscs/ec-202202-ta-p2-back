@@ -1,7 +1,6 @@
-export interface IRegisterUserRepository {
-  register(input: any): Promise<void>
-}
+import { RegisterUserOutput, User } from '../types/auth'
 
-export interface ILoginUserRepository {
-  login<Input, Output>(input: Input): Promise<Output>
+export interface IAuthRepository {
+  create(input: User): Promise<RegisterUserOutput>
+  findByEmail(input: string): Promise<User | undefined>
 }

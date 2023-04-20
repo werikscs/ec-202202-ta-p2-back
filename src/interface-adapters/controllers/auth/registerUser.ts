@@ -9,8 +9,12 @@ class RegisterUserController {
     const { name, email, password } = req.body
 
     try {
-      await this.registerUserUseCase.execute({ name, email, password })
-      return res.status(201).json({})
+      const output = await this.registerUserUseCase.execute({
+        name,
+        email,
+        password,
+      })
+      return res.status(201).json({ ...output })
     } catch (error) {
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json({ message: error.message })

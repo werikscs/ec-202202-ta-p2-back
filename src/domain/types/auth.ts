@@ -4,7 +4,22 @@ export type RegisterUserInput = {
   password: string
 }
 
-export type UserDataDB = {
+export type RegisterUserOutput = {
+  id: string
+  name: string
+  email: string
+}
+
+export type LoginUserInput = {
+  email: string
+  password: string
+}
+
+export type LoginUserOutput = {
+  token: string
+}
+
+export type User = {
   id: string
   email: string
   name: string
